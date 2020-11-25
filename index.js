@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 let usuario = {
- fullname:'',
+ fullName:'',
  phone: ''
 };
 let response = {
@@ -27,7 +27,7 @@ app.get('/phone', function (req, res) {
 });
 
 app.post('/phone', function (req, res) {
-    if(!req.body.fullname || !req.body.phone) {
+    if(!req.body.fullName || !req.body.phone) {
         response = {
          error: true,
          code: 502,
@@ -36,7 +36,7 @@ app.post('/phone', function (req, res) {
     } else {
         const file = JSON.parse(fs.readFileSync('./phones.json'));
         file.phones.push({
-            fullname: req.body.fullname,
+            fullName: req.body.fullName,
             phone: req.body.phone
         });
         fs.writeFileSync('./phones.json', JSON.stringify(file));
